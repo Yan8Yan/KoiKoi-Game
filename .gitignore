@@ -1,0 +1,76 @@
+# Игнорируем папки Unity, учитывая, что они лежат в KoiKoi/
+KoiKoi/[Ll]ibrary/
+KoiKoi/[Tt]emp/
+KoiKoi/[Oo]bj/
+KoiKoi/[Bb]uild/
+KoiKoi/[Bb]uilds/
+KoiKoi/[Ll]ogs/
+KoiKoi/[Uu]ser[Ss]ettings/
+
+# Логи и прочее Unity
+KoiKoi/*.log
+
+# Blender временные файлы
+KoiKoi/*.blend1
+KoiKoi/*.blend1.meta
+
+# MemoryCaptures и записи (можно игнорировать)
+KoiKoi/[Mm]emoryCaptures/
+KoiKoi/[Rr]ecordings/
+
+# Игнорируем JetBrains Rider и Visual Studio файлы
+KoiKoi/[Aa]ssets/Plugins/Editor/JetBrains*
+KoiKoi/*.DotSettings.user
+KoiKoi/.vs/
+KoiKoi/.gradle/
+
+# Unity автогенерируемые файлы проекта
+KoiKoi/ExportedObj/
+KoiKoi/.consulo/
+KoiKoi/*.csproj
+KoiKoi/*.unityproj
+KoiKoi/*.sln
+KoiKoi/*.suo
+KoiKoi/*.tmp
+KoiKoi/*.user
+KoiKoi/*.userprefs
+KoiKoi/*.pidb
+KoiKoi/*.booproj
+KoiKoi/*.svd
+KoiKoi/*.pdb
+KoiKoi/*.mdb
+KoiKoi/*.opendb
+KoiKoi/*.VC.db
+
+# Unity crash reports и авто сгенерированные метафайлы
+KoiKoi/sysinfo.txt
+KoiKoi/mono_crash.*
+
+# Игнорируем билды
+KoiKoi/*.apk
+KoiKoi/*.aab
+KoiKoi/*.unitypackage
+KoiKoi/*.unitypackage.meta
+KoiKoi/*.app
+
+# Crashlytics
+KoiKoi/crashlytics-build.properties
+
+# TestRunner файлы
+KoiKoi/InitTestScene*.unity*
+
+# Addressables
+KoiKoi/ServerData
+KoiKoi/[Aa]ssets/StreamingAssets/aa*
+KoiKoi/[Aa]ssets/AddressableAssetsData/link.xml*
+KoiKoi/[Aa]ssets/Addressables_Temp*
+KoiKoi/[Aa]ssets/AddressableAssetsData/*/*.bin*
+
+# Visual Scripting auto-generated files
+KoiKoi/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
+KoiKoi/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
+KoiKoi/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
+KoiKoi/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
+
+# Auto-generated scenes by play mode tests
+KoiKoi/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
