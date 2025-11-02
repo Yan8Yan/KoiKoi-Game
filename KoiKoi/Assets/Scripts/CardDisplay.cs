@@ -16,11 +16,11 @@ public class CardDisplay3D : MonoBehaviour
     {
         cardData = card;
 
-        Material faceMat = new Material(cardFaceMaterial);
-        faceMat.mainTexture = card.cardSprite.texture;
+        Material faceMat = new Material(cardFaceMaterial); //Мы создаём новый экземпляр материала на основе шаблона cardFaceMaterial.
+        faceMat.mainTexture = card.cardSprite.texture; //Здесь мы устанавливаем текстуру для "лица" карты.
 
-        frontFaceRenderer.material = faceMat;
-        backFaceRenderer.material = cardBackMaterial;
+        frontFaceRenderer.material = faceMat; //Это рендерер передней стороны карты. Мы присваиваем ему уникальный материал с нужной текстурой.
+        backFaceRenderer.material = cardBackMaterial; //Здесь используем общий материал для всех карт, так как задняя сторона обычно одинаковая и менять её не нужно.
     }
 
     public void Flip(bool faceUp)
