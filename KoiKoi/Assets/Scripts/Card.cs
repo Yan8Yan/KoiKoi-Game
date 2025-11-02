@@ -9,6 +9,7 @@ namespace KoiKoiProject
         public string cardName;
         public CardType cardType;
         public Month month;
+        public Sprite cardSprite;
         public enum CardType
         {
             hikari, // благородные
