@@ -1,27 +1,34 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using KoiKoiProject;
 
 public class CardDisplay3D : MonoBehaviour
 {
     [SerializeField] private MeshRenderer frontFaceRenderer;
     [SerializeField] private MeshRenderer backFaceRenderer;
+    [SerializeField] private Card cardData;
 
     [SerializeField] private Material cardBackMaterial;
     [SerializeField] private Material cardFaceMaterial;
 
-    private Card cardData;
     private bool isFaceUp = false;
 
     public void SetCard(Card card)
     {
         cardData = card;
 
-        Material faceMat = new Material(cardFaceMaterial); //Мы создаём новый экземпляр материала на основе шаблона cardFaceMaterial.
-        faceMat.mainTexture = card.cardSprite.texture; //Здесь мы устанавливаем текстуру для "лица" карты.
+        Debug.Log("SetCard: " + card.name);
+        Debug.Log("Texture = " + card.cardSprite.texture);
 
-        frontFaceRenderer.material = faceMat; //Это рендерер передней стороны карты. Мы присваиваем ему уникальный материал с нужной текстурой.
-        backFaceRenderer.material = cardBackMaterial; //Здесь используем общий материал для всех карт, так как задняя сторона обычно одинаковая и менять её не нужно.
+        Material faceMat = new Material(cardFaceMaterial);
+        faceMat.mainTexture = card.cardSprite.texture;
+        Debug.Log("faceMat.mainTexture = " + faceMat.mainTexture);
+
+        frontFaceRenderer.material = faceMat;
+        backFaceRenderer.material = cardBackMaterial;
+
+        Debug.Log("Renderer material texture = " + frontFaceRenderer.material.mainTexture);
     }
+
 
     public void Flip(bool faceUp)
     {
