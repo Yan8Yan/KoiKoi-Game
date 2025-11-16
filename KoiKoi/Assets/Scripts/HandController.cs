@@ -7,6 +7,7 @@ public class HandController3D : MonoBehaviour
     [Header("Card Settings")]
     public GameObject cardPrefab;
     public Transform cardTransform;
+    public CardDatabase cardDatabase;
 
     [Header("Veer Settings")]
     public float fanAngle = 50f;      // Общий угол веера
@@ -26,10 +27,21 @@ public class HandController3D : MonoBehaviour
 
     public void AddCard()
     {
+        // Выбор случайной карты из базы
+        Card randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
+
+        // Создаем объект
         GameObject newCard = Instantiate(cardPrefab, cardTransform.position, Quaternion.identity, cardTransform);
+
+        // Назначаем данные в CardDisplay3D
+        CardDisplay3D display = newCard.GetComponent<CardDisplay3D>();
+        display.SetCard(randomCard);
+        display.Flip(true); // Показать лицом, если нужно
+
         cardsInHand.Add(newCard);
         UpdateCardVisuals();
     }
+
 
     private void UpdateCardVisuals()
     {

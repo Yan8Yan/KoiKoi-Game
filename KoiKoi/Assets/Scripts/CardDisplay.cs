@@ -14,20 +14,27 @@ public class CardDisplay3D : MonoBehaviour
 
     public void SetCard(Card card)
     {
-        cardData = card;
+        if (card == null)
+        {
+            Debug.LogError("Card is null!");
+            return;
+        }
 
-        Debug.Log("SetCard: " + card.name);
-        Debug.Log("Texture = " + card.cardSprite.texture);
+        if (card.cardSprite == null)
+        {
+            Debug.LogError("Card sprite not assigned: " + card.cardName);
+            return;
+        }
+
+        cardData = card;
 
         Material faceMat = new Material(cardFaceMaterial);
         faceMat.mainTexture = card.cardSprite.texture;
-        Debug.Log("faceMat.mainTexture = " + faceMat.mainTexture);
 
         frontFaceRenderer.material = faceMat;
         backFaceRenderer.material = cardBackMaterial;
-
-        Debug.Log("Renderer material texture = " + frontFaceRenderer.material.mainTexture);
     }
+
 
 
     public void Flip(bool faceUp)
