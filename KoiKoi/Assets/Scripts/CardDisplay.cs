@@ -28,8 +28,9 @@ public class CardDisplay3D : MonoBehaviour
         isFaceUp = faceUp;
 
         frontFaceRenderer.gameObject.SetActive(faceUp);
-        backFaceRenderer.gameObject.SetActive(!faceUp);
+        backFaceRenderer.gameObject.SetActive(true); // всегда включён
     }
+
 
     public Card GetCardData() => cardData;
 }
