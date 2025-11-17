@@ -14,27 +14,13 @@ public class CardDisplay3D : MonoBehaviour
 
     public void SetCard(Card card)
     {
-        if (card == null)
-        {
-            Debug.LogError("Card is null!");
-            return;
-        }
-
-        if (card.cardSprite == null)
-        {
-            Debug.LogError("Card sprite not assigned: " + card.cardName);
-            return;
-        }
-
         cardData = card;
 
         Material faceMat = new Material(cardFaceMaterial);
         faceMat.mainTexture = card.cardSprite.texture;
-
         frontFaceRenderer.material = faceMat;
         backFaceRenderer.material = cardBackMaterial;
     }
-
 
 
     public void Flip(bool faceUp)

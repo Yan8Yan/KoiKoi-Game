@@ -15,3 +15,4 @@ MonoBehaviour:
   cardName: peony_blue_ribbon
   cardType: 2
   month: 5
+  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}

@@ -438,6 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HandController
   cardPrefab: {fileID: 6137768864510059381, guid: a6aebe84ce748de4db41dc0ad05a1eb1, type: 3}
   cardTransform: {fileID: 810289678}
+  cardDatabase: {fileID: 11400000, guid: 00f8f684d850edb48bc3b21e64d834cb, type: 2}
   fanAngle: 40
   horizontalSpread: 0.5
   verticalLift: 0.1
