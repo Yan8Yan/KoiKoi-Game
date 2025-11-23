@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: bush_clover_boar
   cardType: 1
   month: 6
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: 7325e7b14bdaab04a9ad5b19dd947441, type: 3}

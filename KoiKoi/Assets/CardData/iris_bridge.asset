@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: iris_bridge
   cardType: 1
   month: 4
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: 176c9355d3977794ab2b50df68813193, type: 3}

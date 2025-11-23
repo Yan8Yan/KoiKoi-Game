@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: maple_deer
   cardType: 1
   month: 9
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: 31097be958c3b6042a785618d07321a8, type: 3}

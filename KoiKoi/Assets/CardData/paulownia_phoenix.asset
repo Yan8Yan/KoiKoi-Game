@@ -15,3 +15,4 @@ MonoBehaviour:
   cardName: paulownia_phoenix
   cardType: 0
   month: 11
+  cardSprite: {fileID: 21300000, guid: 5c466bba3860bcd40a6a7b2dff51c24c, type: 3}

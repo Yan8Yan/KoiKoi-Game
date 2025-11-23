@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: plum_bush_warbler
   cardType: 1
   month: 1
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: bd3ac5c7d67a3c3498ec3dc209d240b7, type: 3}

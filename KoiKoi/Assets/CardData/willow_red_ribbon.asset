@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: willow_red_ribbon
   cardType: 2
   month: 10
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: 9cbb0182177fa8a45a3eb9ef571c187b, type: 3}

@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: 
   cardType: 3
   month: 5
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: 4f076b8adb089e946a28d6c9f897eced, type: 3}

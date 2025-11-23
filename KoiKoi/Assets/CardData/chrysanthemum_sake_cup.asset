@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: chrysanthemum_sake_cup
   cardType: 1
   month: 8
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: b548c551c90670e45be146e671691338, type: 3}

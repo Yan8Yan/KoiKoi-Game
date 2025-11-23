@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: wisteria_red_ribbon
   cardType: 2
   month: 3
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: f75541db6b0f3734085b649ce5c889dc, type: 3}
