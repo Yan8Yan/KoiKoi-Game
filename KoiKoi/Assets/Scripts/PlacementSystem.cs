@@ -10,7 +10,7 @@ namespace KoiKoiProject
 {
     namespace Assets.Scripts
     {
-        internal class PlacementSystem
+        internal class PlacementSystem : MonoBehaviour
         {
             [SerializeField]
             private GameObject mouseIndicator; //It will show shich position we are selecting
@@ -18,7 +18,7 @@ namespace KoiKoiProject
             [SerializeField]
             private InputManager inputManager;
 
-            private void Upgrade()
+            private void Update()
             {
                 Vector3 mousePosition = inputManager.GetSelectedMapPosition();
                 mouseIndicator.transform.position = mousePosition;

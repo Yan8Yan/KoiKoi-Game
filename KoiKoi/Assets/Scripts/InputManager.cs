@@ -10,7 +10,7 @@ namespace KoiKoiProject
                                     //‘ункци€ `Raycast` в Unity необходима дл€ определени€ того,
                                     //находитс€ ли какой-либо объект в луче, выпущенном из определенной точки в пространстве
 
-        private Vector2 lastPosition; //so we can catch the last position detected
+        private Vector3 lastPosition; //so we can catch the last position detected
 
         [SerializeField]
         private LayerMask placementLayerMask;
@@ -19,7 +19,6 @@ namespace KoiKoiProject
         public Vector3 GetSelectedMapPosition() //метод вычисл€ет точку на карте, по которой пользователь щелкнул мышью
         {
             Vector3 mousePos = Input.mousePosition; //unity возвращает позицию курсора в пиксел€х
-            mousePos.z = sceneCamera.nearClipPlane; //это вроде не нужно но € оставлю на вс€кий случай. штука задает глубину
 
             Ray ray = sceneCamera.ScreenPointToRay(mousePos); //“еперь камера "выстреливает" луч через точку на экране, где находитс€ курсор.
 
