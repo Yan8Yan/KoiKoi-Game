@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: pine_crane_and_sun
   cardType: 0
   month: 0
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: b82199f28258e0345b0fd5c3e1e2a579, type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f1fdbd738ac9c4a879f8957a9e2f50, type: 3}
   m_Name: pampas_grass_moon_and_geese
   m_EditorClassIdentifier: Assembly-CSharp::KoiKoiProject.Card
-  cardName: pampas_grass_moon_and_geese
+  cardName: pampas_grass_moon
   cardType: 0
   month: 7
+  cardSprite: {fileID: 21300000, guid: cfcdd80204e25ae4ab40da2a47e4dee8, type: 3}

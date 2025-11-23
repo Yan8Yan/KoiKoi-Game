@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: cherry_curtain
   cardType: 0
   month: 2
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: d4883e60b5ac0694ab039ad311dccc54, type: 3}

@@ -15,3 +15,4 @@ MonoBehaviour:
   cardName: maple_blue_ribbon
   cardType: 2
   month: 9
+  cardSprite: {fileID: 21300000, guid: 48588d52e9b1536489118ec385108dc4, type: 3}

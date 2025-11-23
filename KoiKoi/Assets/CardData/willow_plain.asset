@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: willow_plain
   cardType: 3
   month: 10
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: 21d190bb5fa587047b6531d97c1a5c1c, type: 3}

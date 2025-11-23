@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: plum_red_ribbon
   cardType: 2
   month: 1
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: 1e0d9ff2fb6167f4db757d2cfbe4fa07, type: 3}

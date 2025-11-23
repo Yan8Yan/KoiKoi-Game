@@ -15,4 +15,4 @@ MonoBehaviour:
   cardName: chrysanthemum_blue_ribbon
   cardType: 2
   month: 8
-  cardSprite: {fileID: 21300000, guid: 43a6562849895db4fab377cce390a1a6, type: 3}
+  cardSprite: {fileID: 21300000, guid: 66f34379c7dc0194bbd9e2dc97043275, type: 3}
