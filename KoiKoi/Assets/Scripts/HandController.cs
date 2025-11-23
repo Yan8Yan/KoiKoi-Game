@@ -31,7 +31,8 @@ public class HandController3D : MonoBehaviour
         Card randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
 
         // Создаем объект
-        GameObject newCard = Instantiate(cardPrefab, cardTransform.position, Quaternion.identity, cardTransform);
+        GameObject newCard = Instantiate(cardPrefab, cardTransform.position, Quaternion.Euler(0, 180, 0), cardTransform);
+
 
         // Назначаем данные в CardDisplay3D
         CardDisplay3D display = newCard.GetComponent<CardDisplay3D>();
