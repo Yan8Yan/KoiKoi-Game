@@ -37,7 +37,7 @@ public class HandController3D : MonoBehaviour
         // Назначаем данные в CardDisplay3D
         CardDisplay3D display = newCard.GetComponent<CardDisplay3D>();
         display.SetCard(randomCard);
-        display.Flip(true); // Показать лицом, если нужно
+        //display.Flip(true); // Показать лицом, если нужно
 
         cardsInHand.Add(newCard);
         UpdateCardVisuals();
@@ -62,7 +62,7 @@ public class HandController3D : MonoBehaviour
             {
                 angle = (fanAngle / 2f) * (offsetIndex / midIndex);
             }
-            card.transform.localRotation = Quaternion.Euler(0f, angle, 0f);
+            card.transform.localRotation = Quaternion.Euler(0f, 180f + angle, 0f);
 
             // Позиция
             float x = offsetIndex * horizontalSpread;
