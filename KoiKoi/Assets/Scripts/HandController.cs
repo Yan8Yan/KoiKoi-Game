@@ -21,7 +21,7 @@ public class HandController3D : MonoBehaviour
     void Start()
     {
         // Для примера добавим 5 карт
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 8; i++)
             AddCard();
     }
 
