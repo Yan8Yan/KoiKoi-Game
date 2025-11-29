@@ -14,7 +14,7 @@ namespace KoiKoiProject
         [SerializeField] private Transform tableParent;       // родитель для карт на столе
         [SerializeField] private int cardsOnTableCount = 5;  // сколько карт на столе
         [SerializeField] private float rowSpacing = 0.15f;     // расстояние между картами
-        [SerializeField] private Vector3 tableCardScale = new Vector3(0.1f, 0.1f, 0.1f); // масштаб карт на столе
+        [SerializeField] private Vector3 tableCardScale = new Vector3(0.2f, 0.2f, 0.2f); // масштаб карт на столе
 
         private void Start()
         {
@@ -37,7 +37,7 @@ namespace KoiKoiProject
                 return;
             }
 
-            // 2️⃣ Случайно выбираем карты без повторов
+            //  Случайно выбираем карты без повторов
             List<Card> selectedCards = new List<Card>();
             for (int i = 0; i < cardsOnTableCount; i++)
             {
