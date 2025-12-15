@@ -28,27 +28,18 @@ namespace KoiKoiProject
                 return;
             }
 
-            // Получаем список карт, которых нет в руке игрока
-            List<Card> availableCards = new List<Card>();
-            foreach (var card in cardDatabase.allCards)
-            {
-                if (!playerHand.Contains(card))
-                    availableCards.Add(card);
-            }
-
-            if (availableCards.Count < 8)
-            {
-                Debug.LogError("Недостаточно карт для генерации на столе!");
-                return;
-            }
 
             // Случайно выбираем 8 карт без повторов
             List<Card> selectedCards = new List<Card>();
             for (int i = 0; i < 8; i++)
             {
-                int index = Random.Range(0, availableCards.Count);
-                selectedCards.Add(availableCards[index]);
-                availableCards.RemoveAt(index);
+                Card randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
+                while (UsedCardDatabase.Instance.IsUsed(randomCard))
+                {
+                    randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
+                }
+                selectedCards.Add(randomCard);
+                UsedCardDatabase.Instance.TryAdd(randomCard);
             }
 
             // Размещаем карты в первых восьми
