@@ -28,8 +28,14 @@ public class HandController3D : MonoBehaviour
     public void AddCard()
     {
         // Выбор случайной карты из базы
+        
         Card randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
-
+        
+        while (UsedCardDatabase.Instance.IsUsed(randomCard))
+        {
+            randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
+        }
+        UsedCardDatabase.Instance.TryAdd(randomCard);
         // Создаем объект
         GameObject newCard = Instantiate(cardPrefab, cardTransform.position, Quaternion.Euler(0, 180, 0), cardTransform);
         newCard.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);

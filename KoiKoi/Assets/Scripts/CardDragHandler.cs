@@ -77,7 +77,8 @@ namespace KoiKoiProject
                     draggedCard.SetParent(slot, worldPositionStays: true);
 
                     // Центрируем карту и поворачиваем
-                    draggedCard.position = slot.position;
+                    draggedCard.position = slot.position + Vector3.up * 0.05f;
+
                     draggedCard.rotation = Quaternion.Euler(0, 180, 0);
 
                     // Устанавливаем фиксированный масштаб 0.22
