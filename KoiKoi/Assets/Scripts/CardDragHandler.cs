@@ -66,12 +66,25 @@ namespace KoiKoiProject
                 if (slot != null)
                 {
                     Debug.Log("Карта положена в слот: " + slot.name);
+
+                    // Привязываем к слоту, сохраняя мировой масштаб
+                    draggedCard.SetParent(slot, worldPositionStays: true);
+
+                    // Центрируем карту и поворачиваем
                     draggedCard.position = slot.position;
                     draggedCard.rotation = Quaternion.Euler(0, 180, 0);
-                    draggedCard.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                    draggedCard.SetParent(slot);
 
-                    handController.RemoveCard(draggedCard.gameObject);
+                    // Устанавливаем фиксированный масштаб 0.22
+                    Vector3 desiredScale = Vector3.one * 2.2f;
+                    Vector3 parentScale = slot.lossyScale; // реальный мировой масштаб родителя
+                    draggedCard.localScale = new Vector3(
+                        desiredScale.x / parentScale.x,
+                        desiredScale.y / parentScale.y,
+                        desiredScale.z / parentScale.z
+                    );
+
+                    // Убираем карту из руки
+                    handController.RemoveCardFromHand(draggedCard.gameObject);
                 }
                 else
                 {
@@ -81,6 +94,7 @@ namespace KoiKoiProject
                 draggedCard = null;
             }
         }
+
 
 
     }

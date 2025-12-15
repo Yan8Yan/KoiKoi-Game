@@ -74,13 +74,13 @@ public class HandController3D : MonoBehaviour
     }
 
 
-    public void RemoveCard(GameObject card)
+    public void RemoveCardFromHand(GameObject card)
     {
         if (cardsInHand.Contains(card))
         {
             cardsInHand.Remove(card);
-            Destroy(card);
-            UpdateCardVisuals();
+            UpdateCardVisuals(); // чтобы рука перестроилась
         }
     }
+
 }
