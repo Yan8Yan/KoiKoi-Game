@@ -8,6 +8,9 @@ namespace KoiKoiProject
         [SerializeField] private LayerMask placementLayerMask;
         [SerializeField] private InputManager inputManager;
 
+        [SerializeField] private TableSlotManager slotManager;
+        [SerializeField] private HandController3D handController;
+
         private Transform draggedCard = null;
         private Vector3 offset;
 
@@ -59,8 +62,26 @@ namespace KoiKoiProject
         {
             if (draggedCard != null && Input.GetMouseButtonUp(0))
             {
+                Transform slot = slotManager.GetClosestSlot(draggedCard.position);
+                if (slot != null)
+                {
+                    Debug.Log("Карта положена в слот: " + slot.name);
+                    draggedCard.position = slot.position;
+                    draggedCard.rotation = Quaternion.Euler(0, 180, 0);
+                    draggedCard.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    draggedCard.SetParent(slot);
+
+                    handController.RemoveCard(draggedCard.gameObject);
+                }
+                else
+                {
+                    Debug.Log("Слот не найден рядом с позицией карты");
+                }
+
                 draggedCard = null;
             }
         }
+
+
     }
 }
