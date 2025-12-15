@@ -7,7 +7,6 @@ namespace KoiKoiProject
         [SerializeField] private Camera sceneCamera;
         [SerializeField] private LayerMask placementLayerMask;
         [SerializeField] private InputManager inputManager;
-
         [SerializeField] private TableSlotManager slotManager;
         [SerializeField] private HandController3D handController;
 
@@ -50,12 +49,19 @@ namespace KoiKoiProject
             {
                 Vector3 targetPos = inputManager.GetSelectedMapPosition();
 
-                draggedCard.position = targetPos + offset + Vector3.up * 0.1f;
-                // 0.1f Ч чтобы карта слегка "поднималась" над поверхностью
+                // —мещение карты над поверхностью
+                Vector3 newPos = targetPos + offset + Vector3.up;
 
+                // ќграничиваем минимальную высоту
+                float minY = 9.0f; // например, высота стола
+                newPos.y = Mathf.Max(newPos.y, minY);
+
+                draggedCard.position = newPos;
                 draggedCard.rotation = HorizontalRotation;
             }
         }
+
+
 
         // ќтпускаем карту
         private void HandleDrop()
