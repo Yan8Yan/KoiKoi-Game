@@ -14,7 +14,7 @@ namespace KoiKoiProject
         private Vector3 offset;
 
         private static readonly Quaternion HorizontalRotation =
-           Quaternion.Euler(0f, 0f, 0f);
+           Quaternion.Euler(0f, 180f, 0f);
 
         private void Update()
         {
