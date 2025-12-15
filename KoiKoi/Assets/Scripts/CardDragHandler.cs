@@ -11,6 +11,9 @@ namespace KoiKoiProject
         private Transform draggedCard = null;
         private Vector3 offset;
 
+        private static readonly Quaternion HorizontalRotation =
+           Quaternion.Euler(0f, 0f, 0f);
+
         private void Update()
         {
             HandlePickUp();
@@ -46,6 +49,8 @@ namespace KoiKoiProject
 
                 draggedCard.position = targetPos + offset + Vector3.up * 0.1f;
                 // 0.1f Ч чтобы карта слегка "поднималась" над поверхностью
+
+                draggedCard.rotation = HorizontalRotation;
             }
         }
 

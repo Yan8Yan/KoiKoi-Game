@@ -32,7 +32,7 @@ public class HandController3D : MonoBehaviour
 
         // Создаем объект
         GameObject newCard = Instantiate(cardPrefab, cardTransform.position, Quaternion.Euler(0, 180, 0), cardTransform);
-        newCard.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        newCard.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
         // Назначаем данные в CardDisplay3D
         CardDisplay3D display = newCard.GetComponent<CardDisplay3D>();
