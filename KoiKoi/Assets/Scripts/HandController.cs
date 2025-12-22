@@ -79,6 +79,10 @@ public class HandController3D : MonoBehaviour
         }
     }
 
+    public void RefreshHand()
+    {
+        UpdateCardVisuals();
+    }
 
     public void RemoveCardFromHand(GameObject card)
     {

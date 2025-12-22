@@ -16,11 +16,18 @@ namespace KoiKoiProject
         private static readonly Quaternion HorizontalRotation =
            Quaternion.Euler(0f, 180f, 0f);
 
+        private Transform originalParent;
+        private Vector3 originalLocalPos;
+        private Quaternion originalLocalRot;
+        private Vector3 originalLocalScale;
+        private int originalSiblingIndex;
+
         private void Update()
         {
             HandlePickUp();
             HandleDrag();
             HandleDrop();
+            //HandleReturn();
         }
 
         // Берём карту, на которую навели курсор
@@ -34,6 +41,11 @@ namespace KoiKoiProject
                     if (hit.transform.CompareTag("Drag"))
                     {
                         draggedCard = hit.transform;
+                        originalParent = draggedCard.parent;
+                        originalLocalPos = draggedCard.localPosition;
+                        originalLocalRot = draggedCard.localRotation;
+                        originalLocalScale = draggedCard.localScale;
+                        originalSiblingIndex = draggedCard.GetSiblingIndex();
 
                         // смещение, чтобы карта не прыгала в центр луча
                         offset = draggedCard.position - hit.point;
@@ -61,6 +73,22 @@ namespace KoiKoiProject
             }
         }
 
+        private void ReturnCard()
+        {
+            // Возвращаем в исходного родителя
+            draggedCard.SetParent(originalParent, worldPositionStays: false);
+
+            // Возвращаем локальные трансформы как было
+            draggedCard.localPosition = originalLocalPos;
+            draggedCard.localRotation = originalLocalRot;
+            draggedCard.localScale = originalLocalScale;
+
+            // Возвращаем порядок в иерархии (чтобы веер не “перемешался”)
+            draggedCard.SetSiblingIndex(originalSiblingIndex);
+
+            // На всякий — пересобрать руку (если у тебя рука управляет раскладкой)
+            handController.RefreshHand();
+        }
 
 
         // Отпускаем карту
@@ -96,6 +124,7 @@ namespace KoiKoiProject
                 else
                 {
                     Debug.Log("Слот не найден рядом с позицией карты");
+                    ReturnCard();
                 }
 
                 draggedCard = null;
