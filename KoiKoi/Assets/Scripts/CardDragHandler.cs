@@ -10,6 +10,11 @@ namespace KoiKoiProject
         [SerializeField] private TableSlotManager slotManager;
         [SerializeField] private HandController3D handController;
 
+        [SerializeField] private Transform plantsRoot;
+        [SerializeField] private Transform ribbonsRoot;
+        [SerializeField] private Transform animalsRoot;
+        [SerializeField] private Transform brightsRoot;
+
         private Transform draggedCard = null;
         private Vector3 offset;
 
@@ -27,7 +32,6 @@ namespace KoiKoiProject
             HandlePickUp();
             HandleDrag();
             HandleDrop();
-            //HandleReturn();
         }
 
         // Берём карту, на которую навели курсор
@@ -99,27 +103,47 @@ namespace KoiKoiProject
                 Transform slot = slotManager.GetClosestSlot(draggedCard.position);
                 if (slot != null)
                 {
-                    Debug.Log("Карта положена в слот: " + slot.name);
+                    var droppedDisplay = draggedCard.GetComponent<CardDisplay3D>();
+                    Card droppedData = droppedDisplay.CardData();
 
-                    // Привязываем к слоту, сохраняя мировой масштаб
-                    draggedCard.SetParent(slot, worldPositionStays: true);
+                    Transform tableCard = slot.GetChild(0);
+                    var tableDisplay = tableCard.GetComponent<CardDisplay3D>();
+                    Card tableData = tableDisplay.CardData();
 
-                    // Центрируем карту и поворачиваем
-                    draggedCard.position = slot.position + Vector3.up * 0.05f;
+                    if (tableData.month != droppedData.month)
+                    {
+                        ReturnCard();
+                        draggedCard = null;
+                        return;
+                    }
+                    else
+                    {
+                        Debug.Log("Карта положена в слот: " + slot.name);
 
-                    draggedCard.rotation = Quaternion.Euler(0, 180, 0);
+                        // Привязываем к слоту, сохраняя мировой масштаб
+                        draggedCard.SetParent(slot, worldPositionStays: true);
 
-                    // Устанавливаем фиксированный масштаб 0.22
-                    Vector3 desiredScale = Vector3.one * 2.2f;
-                    Vector3 parentScale = slot.lossyScale; // реальный мировой масштаб родителя
-                    draggedCard.localScale = new Vector3(
-                        desiredScale.x / parentScale.x,
-                        desiredScale.y / parentScale.y,
-                        desiredScale.z / parentScale.z
-                    );
+                        // Центрируем карту и поворачиваем
+                        draggedCard.position = slot.position + Vector3.up * 0.05f;
 
-                    // Убираем карту из руки
-                    handController.RemoveCardFromHand(draggedCard.gameObject);
+                        draggedCard.rotation = Quaternion.Euler(0, 180, 0);
+
+                        // Устанавливаем фиксированный масштаб 0.22
+                        Vector3 desiredScale = Vector3.one * 2.2f;
+                        Vector3 parentScale = slot.lossyScale; // реальный мировой масштаб родителя
+                        draggedCard.localScale = new Vector3(
+                            desiredScale.x / parentScale.x,
+                            desiredScale.y / parentScale.y,
+                            desiredScale.z / parentScale.z
+                        );
+
+                        // Убираем карту из руки
+                        handController.RemoveCardFromHand(draggedCard.gameObject);
+
+                        SendCardToPaper(draggedCard, droppedData);
+                        SendCardToPaper(tableCard, tableData);
+                        slot = null;
+                    }
                 }
                 else
                 {
@@ -130,6 +154,26 @@ namespace KoiKoiProject
                 draggedCard = null;
             }
         }
+        private Transform GetPaperRoot(Card card)
+        {
+            switch (card.cardType)
+            {
+                case Card.CardType.kasu: return plantsRoot;
+                case Card.CardType.tanzaku: return ribbonsRoot;
+                case Card.CardType.tane: return animalsRoot;
+                case Card.CardType.hikari: return brightsRoot;
+                default: return plantsRoot;
+            }
+        }
+        private void SendCardToPaper(Transform cardTransform, Card cardData)
+        {
+            Debug.Log("Две подходящие карты собраны");
+            Transform root = GetPaperRoot(cardData);
+            cardTransform.SetParent(root, false);
+            cardTransform.localPosition = Vector3.up * 0.01f * (root.childCount - 1);
+            cardTransform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+
 
 
 

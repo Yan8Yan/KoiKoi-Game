@@ -32,5 +32,5 @@ public class CardDisplay3D : MonoBehaviour
     }
 
 
-    public Card GetCardData() => cardData;
+    public Card CardData() => cardData;
 }
