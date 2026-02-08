@@ -103,46 +103,31 @@ namespace KoiKoiProject
                 Transform slot = slotManager.GetClosestSlot(draggedCard.position);
                 if (slot != null)
                 {
-                    var droppedDisplay = draggedCard.GetComponent<CardDisplay3D>();
-                    Card droppedData = droppedDisplay.CardData();
-
-                    Transform tableCard = slot.GetChild(0);
-                    var tableDisplay = tableCard.GetComponent<CardDisplay3D>();
-                    Card tableData = tableDisplay.CardData();
-
-                    if (tableData.month != droppedData.month)
+                    if (slot.childCount == 0)
                     {
-                        ReturnCard();
-                        draggedCard = null;
-                        return;
+                        PlaceCardInSlot(draggedCard, slot); //кладём карту в слот, если он пустой
                     }
                     else
                     {
-                        Debug.Log("Карта положена в слот: " + slot.name);
+                        var droppedDisplay = draggedCard.GetComponent<CardDisplay3D>();
+                        Card droppedData = droppedDisplay.CardData();
 
-                        // Привязываем к слоту, сохраняя мировой масштаб
-                        draggedCard.SetParent(slot, worldPositionStays: true);
+                        Transform tableCard = slot.GetChild(0);
+                        var tableDisplay = tableCard.GetComponent<CardDisplay3D>();
+                        Card tableData = tableDisplay.CardData();
 
-                        // Центрируем карту и поворачиваем
-                        draggedCard.position = slot.position + Vector3.up * 0.05f;
-
-                        draggedCard.rotation = Quaternion.Euler(0, 180, 0);
-
-                        // Устанавливаем фиксированный масштаб 0.22
-                        Vector3 desiredScale = Vector3.one * 2.2f;
-                        Vector3 parentScale = slot.lossyScale; // реальный мировой масштаб родителя
-                        draggedCard.localScale = new Vector3(
-                            desiredScale.x / parentScale.x,
-                            desiredScale.y / parentScale.y,
-                            desiredScale.z / parentScale.z
-                        );
-
-                        // Убираем карту из руки
-                        handController.RemoveCardFromHand(draggedCard.gameObject);
-
-                        SendCardToPaper(draggedCard, droppedData);
-                        SendCardToPaper(tableCard, tableData);
-                        slot = null;
+                        if (tableData.month != droppedData.month)
+                        {
+                            ReturnCard();
+                            draggedCard = null;
+                            return;
+                        }
+                        else
+                        {
+                            PlaceCardInSlot(draggedCard, slot);
+                            SendCardToPaper(draggedCard, droppedData);
+                            SendCardToPaper(tableCard, tableData);
+                        }
                     }
                 }
                 else
@@ -173,6 +158,32 @@ namespace KoiKoiProject
             cardTransform.localPosition = Vector3.up * 0.01f * (root.childCount - 1);
             cardTransform.localRotation = Quaternion.Euler(0, 180, 0);
         }
+
+        private void PlaceCardInSlot(Transform card, Transform slot)
+        {
+            Debug.Log("Карта положена в слот: " + slot.name);
+
+            // Привязываем к слоту, сохраняя мировой масштаб
+            draggedCard.SetParent(slot, worldPositionStays: true);
+
+            // Центрируем карту и поворачиваем
+            draggedCard.position = slot.position + Vector3.up * 0.05f;
+
+            draggedCard.rotation = Quaternion.Euler(0, 180, 0);
+
+            // Устанавливаем фиксированный масштаб 0.22
+            Vector3 desiredScale = Vector3.one * 2.2f;
+            Vector3 parentScale = slot.lossyScale; // реальный мировой масштаб родителя
+            draggedCard.localScale = new Vector3(
+                desiredScale.x / parentScale.x,
+                desiredScale.y / parentScale.y,
+                desiredScale.z / parentScale.z
+            );
+
+            // Убираем карту из руки
+            handController.RemoveCardFromHand(draggedCard.gameObject);
+        }
+
 
 
 
