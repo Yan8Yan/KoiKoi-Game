@@ -38,4 +38,14 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log($"{gameObject.name} captured {card.cardType}");
     }
+
+    public void CheckForYaku()
+    {
+        int points = YakuChecker.CheckYaku(this);
+
+        if (points > 0)
+        {
+            Debug.Log(gameObject.name + " has Yaku! Points: " + points);
+        }
+    }
 }

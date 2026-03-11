@@ -129,6 +129,8 @@ namespace KoiKoiProject
 
                             SendCardToPaper(draggedCard, droppedData);
                             SendCardToPaper(tableCard, tableData);
+
+                            ownerPlayer.CheckForYaku();
                         }
                     }
                 }
