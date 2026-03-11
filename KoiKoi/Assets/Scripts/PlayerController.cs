@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         if (points > 0)
         {
             Debug.Log(gameObject.name + " has Yaku! Points: " + points);
+            UIManager.Instance.ShowKoiKoi();
         }
     }
 }
