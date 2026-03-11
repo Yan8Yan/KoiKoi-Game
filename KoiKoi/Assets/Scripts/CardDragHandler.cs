@@ -9,6 +9,7 @@ namespace KoiKoiProject
         [SerializeField] private InputManager inputManager;
         [SerializeField] private TableSlotManager slotManager;
         [SerializeField] private HandController3D handController;
+        [SerializeField] private PlayerController ownerPlayer;
 
         [SerializeField] private Transform plantsRoot;
         [SerializeField] private Transform ribbonsRoot;
@@ -125,8 +126,11 @@ namespace KoiKoiProject
                         else
                         {
                             PlaceCardInSlot(draggedCard, slot);
+
                             SendCardToPaper(draggedCard, droppedData);
                             SendCardToPaper(tableCard, tableData);
+
+                            ownerPlayer.CheckForYaku();
                         }
                     }
                 }
@@ -152,11 +156,13 @@ namespace KoiKoiProject
         }
         private void SendCardToPaper(Transform cardTransform, Card cardData)
         {
-            Debug.Log("Две подходящие карты собраны");
             Transform root = GetPaperRoot(cardData);
+
             cardTransform.SetParent(root, false);
             cardTransform.localPosition = Vector3.up * 0.01f * (root.childCount - 1);
             cardTransform.localRotation = Quaternion.Euler(0, 180, 0);
+
+            ownerPlayer.AddCapturedCard(cardData);
         }
 
         private void PlaceCardInSlot(Transform card, Transform slot)
