@@ -249,10 +249,55 @@ MonoBehaviour:
   slotManager: {fileID: 681533557}
   handController: {fileID: 810289677}
   ownerPlayer: {fileID: 2145156520}
-  plantsRoot: {fileID: 638465558}
-  ribbonsRoot: {fileID: 498040780}
-  animalsRoot: {fileID: 756653629}
-  brightsRoot: {fileID: 40965278}
+  deckTurnResolver: {fileID: 36088090}
+  captureManager: {fileID: 704416649}
+--- !u!1 &36088089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 36088091}
+  - component: {fileID: 36088090}
+  m_Layer: 0
+  m_Name: DeckTurnResolver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &36088090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36088089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5f4567a16928740b4d83bc39a831ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KoiKoiProject.DeckTurnResolver
+  slotManager: {fileID: 681533557}
+  handController: {fileID: 810289677}
+  captureManager: {fileID: 704416649}
+--- !u!4 &36088091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36088089}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &40620559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,8 +1824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8604dbb8aecd64e82d05c9b1d98621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TableCardSpawner
-  cardDatabase: {fileID: 11400000, guid: 00f8f684d850edb48bc3b21e64d834cb, type: 2}
-  playerHand: []
   cardPrefab: {fileID: 6137768864510059381, guid: a6aebe84ce748de4db41dc0ad05a1eb1, type: 3}
   tableSlots:
   - {fileID: 827945364}
@@ -1880,6 +1923,54 @@ MonoBehaviour:
   - {fileID: 279054906}
   - {fileID: 89536234}
   - {fileID: 1118013140}
+--- !u!1 &704416648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 704416650}
+  - component: {fileID: 704416649}
+  m_Layer: 0
+  m_Name: CardCaptureManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &704416649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704416648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597b901120da75142816f80b2e28829e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KoiKoiProject.CardCaptureManager
+  plantsRoot: {fileID: 638465558}
+  ribbonsRoot: {fileID: 498040780}
+  animalsRoot: {fileID: 756653629}
+  brightsRoot: {fileID: 40965278}
+--- !u!4 &704416650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704416648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &714585694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2996,6 +3087,51 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18, y: 0.05, z: 0.26}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1625473408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1625473410}
+  - component: {fileID: 1625473409}
+  m_Layer: 0
+  m_Name: DeckManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1625473409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625473408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d762e09568c12439c9bbeabe64a341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KoiKoiProject.DeckManager
+  cardDatabase: {fileID: 11400000, guid: 00f8f684d850edb48bc3b21e64d834cb, type: 2}
+--- !u!4 &1625473410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625473408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1691251406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3966,50 +4102,6 @@ Transform:
   - {fileID: 681533556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2122458816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2122458818}
-  - component: {fileID: 2122458817}
-  m_Layer: 0
-  m_Name: UsedCardDatabase
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2122458817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122458816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cc78edc3016e324e9464be706d58fd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KoiKoiProject.UsedCardDatabase
---- !u!4 &2122458818
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122458816}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11139, y: 8.61, z: -3.48654}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2145156518
 GameObject:
   m_ObjectHideFlags: 0
@@ -4065,7 +4157,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2116890965}
-  - {fileID: 2122458818}
   - {fileID: 261768992}
   - {fileID: 1506618640}
   - {fileID: 1322794468}
@@ -4076,3 +4167,6 @@ SceneRoots:
   - {fileID: 1691251409}
   - {fileID: 938267934}
   - {fileID: 325806815}
+  - {fileID: 1625473410}
+  - {fileID: 704416650}
+  - {fileID: 36088091}

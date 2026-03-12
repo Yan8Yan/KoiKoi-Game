@@ -66,7 +66,7 @@ namespace KoiKoiProject
 
             Vector3 newPos = targetPos + offset + Vector3.up;
 
-            float minY = 9.0f;
+            float minY = 11.27f;
             newPos.y = Mathf.Max(newPos.y, minY);
 
             draggedCard.position = newPos;
