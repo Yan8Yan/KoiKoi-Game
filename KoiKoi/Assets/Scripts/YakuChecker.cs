@@ -6,23 +6,22 @@ public static class YakuChecker
     {
         int points = 0;
 
-        //неправильные значения потом поменять
-        if (player.kasu.Count >= 2)
+        if (player.kasu.Count >= 10)
         {
-            points += 1 + (player.kasu.Count - 2);
+            points += 1 + (player.kasu.Count - 10);
         }
 
-        if (player.tanzaku.Count >= 2)
+        if (player.tanzaku.Count >= 5)
         {
-            points += 1 + (player.tanzaku.Count - 2);
+            points += 1 + (player.tanzaku.Count - 5);
         }
 
-        if (player.tane.Count >= 2)
+        if (player.tane.Count >= 5)
         {
-            points += 1 + (player.tane.Count - 2);
+            points += 1 + (player.tane.Count - 5);
         }
 
-        if (player.hikari.Count >= 2)
+        if (player.hikari.Count >= 3)
         {
             points += 5;
         }
