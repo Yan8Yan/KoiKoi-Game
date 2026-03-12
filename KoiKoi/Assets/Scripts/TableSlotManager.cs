@@ -24,5 +24,21 @@ namespace KoiKoiProject
             }
             return closestSlot;
         }
+
+        public Transform GetEmptySlot()
+        {
+            foreach (Transform slot in tableSlots)
+            {
+                if (slot.childCount == 0)
+                    return slot;
+            }
+
+            return null;
+        }
+
+        public List<Transform> GetAllSlots()
+        {
+            return tableSlots;
+        }
     }
 }

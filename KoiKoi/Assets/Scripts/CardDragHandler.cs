@@ -106,7 +106,8 @@ namespace KoiKoiProject
                 {
                     if (slot.childCount == 0)
                     {
-                        PlaceCardInSlot(draggedCard, slot); //кладём карту в слот, если он пустой
+                        PlaceCardInSlot(draggedCard, slot);
+                        DrawCardFromDeck(); //кладём карту в слот, если он пустой
                     }
                     else
                     {
@@ -131,6 +132,7 @@ namespace KoiKoiProject
                             SendCardToPaper(tableCard, tableData);
 
                             ownerPlayer.CheckForYaku();
+                            DrawCardFromDeck();
                         }
                     }
                 }
@@ -169,28 +171,84 @@ namespace KoiKoiProject
         {
             Debug.Log("Карта положена в слот: " + slot.name);
 
-            // Привязываем к слоту, сохраняя мировой масштаб
-            draggedCard.SetParent(slot, worldPositionStays: true);
+            card.SetParent(slot, true);
 
-            // Центрируем карту и поворачиваем
-            draggedCard.position = slot.position + Vector3.up * 0.05f;
+            card.position = slot.position + Vector3.up * 0.05f;
+            card.rotation = Quaternion.Euler(0, 180, 0);
 
-            draggedCard.rotation = Quaternion.Euler(0, 180, 0);
-
-            // Устанавливаем фиксированный масштаб 0.22
             Vector3 desiredScale = Vector3.one * 2.2f;
-            Vector3 parentScale = slot.lossyScale; // реальный мировой масштаб родителя
-            draggedCard.localScale = new Vector3(
+            Vector3 parentScale = slot.lossyScale;
+
+            card.localScale = new Vector3(
                 desiredScale.x / parentScale.x,
                 desiredScale.y / parentScale.y,
                 desiredScale.z / parentScale.z
             );
 
-            // Убираем карту из руки
-            handController.RemoveCardFromHand(draggedCard.gameObject);
+            if (draggedCard != null)
+                handController.RemoveCardFromHand(card.gameObject);
         }
 
 
+
+        private void CheckDeckMatch(Transform drawnCardTransform, Card drawnCardData)
+        {
+            Transform matchedCard = null;
+            Card matchedData = null;
+
+            foreach (Transform slot in slotManager.GetAllSlots())
+            {
+                if (slot.childCount == 0)
+                    continue;
+
+                Transform tableCard = slot.GetChild(0);
+
+                if (tableCard == drawnCardTransform)
+                    continue;
+
+                CardDisplay3D display = tableCard.GetComponent<CardDisplay3D>();
+                Card tableData = display.CardData();
+
+                if (tableData.month == drawnCardData.month)
+                {
+                    matchedCard = tableCard;
+                    matchedData = tableData;
+                    break;
+                }
+            }
+
+            if (matchedCard != null)
+            {
+                Debug.Log("Совпадение с картой на столе!");
+
+                SendCardToPaper(drawnCardTransform, drawnCardData);
+                SendCardToPaper(matchedCard, matchedData);
+
+                ownerPlayer.CheckForYaku();
+            }
+        }
+
+        private void DrawCardFromDeck()
+        {
+            Card drawnCard = DeckManager.Instance.DrawCard();
+
+            if (drawnCard == null)
+                return;
+
+            GameObject cardObj = Instantiate(handController.cardPrefab);
+
+            CardDisplay3D display = cardObj.GetComponent<CardDisplay3D>();
+            display.SetCard(drawnCard);
+
+            Transform slot = slotManager.GetEmptySlot();
+
+            if (slot == null)
+                return;
+
+            PlaceCardInSlot(cardObj.transform, slot);
+
+            CheckDeckMatch(cardObj.transform, drawnCard);
+        }
 
 
 
