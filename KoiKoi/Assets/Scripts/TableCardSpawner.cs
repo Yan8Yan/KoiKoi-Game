@@ -5,10 +5,6 @@ namespace KoiKoiProject
 {
     public class TableCardSpawner : MonoBehaviour
     {
-        [Header("Card Database")]
-        [SerializeField] private CardDatabase cardDatabase;   // все карты
-        [SerializeField] private List<Card> playerHand;       // карты в руке игрока
-
         [Header("Spawn Settings")]
         [SerializeField] private GameObject cardPrefab;       // префаб карты
         [SerializeField] private List<Transform> tableSlots;  // слоты на столе (первые 4 слота)
@@ -24,41 +20,32 @@ namespace KoiKoiProject
         {
             if (tableSlots.Count < 8)
             {
-                Debug.LogError("Необходимо минимум 8 слотов на столе!");
+                Debug.LogError("Need at least 8 table slots!");
                 return;
             }
 
-
-            // Случайно выбираем 8 карт без повторов
-            List<Card> selectedCards = new List<Card>();
             for (int i = 0; i < 8; i++)
             {
-                Card randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
-                while (UsedCardDatabase.Instance.IsUsed(randomCard))
+                Card drawnCard = DeckManager.Instance.DrawCard();
+
+                if (drawnCard == null)
                 {
-                    randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
+                    Debug.Log("Deck empty");
+                    return;
                 }
-                selectedCards.Add(randomCard);
-                UsedCardDatabase.Instance.TryAdd(randomCard);
-            }
 
-            // Размещаем карты в первых восьми
-            for (int i = 0; i < 8; i++)
-            {
                 Transform slot = tableSlots[i];
                 GameObject cardObj = Instantiate(cardPrefab);
 
-                // Привязываем к слоту
-                cardObj.transform.SetParent(slot, false); // false = сохраняем локальные координаты
+                cardObj.transform.SetParent(slot, false);
                 cardObj.transform.localPosition = Vector3.zero;
                 cardObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
                 cardObj.transform.localScale = tableCardScale;
 
-                // Назначаем данные карты через CardDisplay3D
-                var cardDisplay = cardObj.GetComponent<CardDisplay3D>();
-                if (cardDisplay != null)
-                    cardDisplay.SetCard(selectedCards[i]);
+                var display = cardObj.GetComponent<CardDisplay3D>();
+                display.SetCard(drawnCard);
             }
         }
     }
 }
+

@@ -27,23 +27,25 @@ public class HandController3D : MonoBehaviour
 
     public void AddCard()
     {
-        // Выбор случайной карты из базы
-        
-        Card randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
-        
-        while (UsedCardDatabase.Instance.IsUsed(randomCard))
+        Card drawnCard = DeckManager.Instance.DrawCard();
+
+        if (drawnCard == null)
         {
-            randomCard = cardDatabase.allCards[Random.Range(0, cardDatabase.allCards.Count)];
+            Debug.Log("Deck is empty!");
+            return;
         }
-        UsedCardDatabase.Instance.TryAdd(randomCard);
-        // Создаем объект
-        GameObject newCard = Instantiate(cardPrefab, cardTransform.position, Quaternion.Euler(0, 180, 0), cardTransform);
+
+        GameObject newCard = Instantiate(
+            cardPrefab,
+            cardTransform.position,
+            Quaternion.Euler(0, 180, 0),
+            cardTransform
+        );
+
         newCard.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
-        // Назначаем данные в CardDisplay3D
         CardDisplay3D display = newCard.GetComponent<CardDisplay3D>();
-        display.SetCard(randomCard);
-        //display.Flip(true); // Показать лицом, если нужно
+        display.SetCard(drawnCard);
 
         cardsInHand.Add(newCard);
         UpdateCardVisuals();

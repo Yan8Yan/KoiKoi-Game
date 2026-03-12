@@ -13,11 +13,14 @@ namespace KoiKoiProject
 
         private void Awake()
         {
-            Instance = this;
-        }
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
 
-        private void Start()
-        {
+            Instance = this;
+
             BuildDeck();
             ShuffleDeck();
         }

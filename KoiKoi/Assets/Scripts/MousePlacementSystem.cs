@@ -10,7 +10,7 @@ namespace KoiKoiProject
 {
     namespace Assets.Scripts
     {
-        internal class PlacementSystem : MonoBehaviour
+        internal class MousePlacementSystem : MonoBehaviour
         {
             [SerializeField]
             private GameObject mouseIndicator; //It will show shich position we are selecting
