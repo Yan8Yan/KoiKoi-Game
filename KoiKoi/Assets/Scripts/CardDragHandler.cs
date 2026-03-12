@@ -70,7 +70,7 @@ namespace KoiKoiProject
                 Vector3 newPos = targetPos + offset + Vector3.up;
 
                 // Ограничиваем минимальную высоту
-                float minY = 9.0f; // например, высота стола
+                float minY = 11.27f; // например, высота стола
                 newPos.y = Mathf.Max(newPos.y, minY);
 
                 draggedCard.position = newPos;
