@@ -1294,6 +1294,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 545127126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &482651748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482651749}
+  m_Layer: 0
+  m_Name: TurnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &482651749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482651748}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -41.96616, y: -239.561, z: 398.1657}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &498040779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,6 +1865,10 @@ MonoBehaviour:
   - {fileID: 68827351}
   - {fileID: 1722667566}
   - {fileID: 1417595056}
+  - {fileID: 72737378}
+  - {fileID: 279054906}
+  - {fileID: 89536234}
+  - {fileID: 1118013140}
   tableCardScale: {x: 0.22, y: 0.22, z: 0.22}
 --- !u!1 &638465557
 GameObject:
@@ -2478,6 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984643bcd06e8f145bd95d42fed5e61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  roundManager: {fileID: 1785844260}
   koiKoiPanel: {fileID: 3062571}
 --- !u!4 &938267934
 Transform:
@@ -3407,6 +3443,55 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18, y: 0.05, z: 0.26}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1785844259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1785844261}
+  - component: {fileID: 1785844260}
+  m_Layer: 0
+  m_Name: RoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1785844260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785844259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5d18ad8cd656b4a9c6e823932ca2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoundManager
+  deckManager: {fileID: 1625473409}
+  mainHand: {fileID: 810289677}
+  enemyHand: {fileID: 1226269480}
+  tableSpawner: {fileID: 618027356}
+  mainPlayer: {fileID: 2145156520}
+--- !u!4 &1785844261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785844259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -41.96616, y: -239.561, z: 398.1657}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1812336956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4151,6 +4236,7 @@ MonoBehaviour:
   tanzaku: []
   tane: []
   hikari: []
+  cardCaptureManager: {fileID: 704416649}
   score: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -4170,3 +4256,5 @@ SceneRoots:
   - {fileID: 1625473410}
   - {fileID: 704416650}
   - {fileID: 36088091}
+  - {fileID: 482651749}
+  - {fileID: 1785844261}

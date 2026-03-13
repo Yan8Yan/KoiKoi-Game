@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public List<Card> tane = new List<Card>();
     public List<Card> hikari = new List<Card>();
 
+    [SerializeField] CardCaptureManager cardCaptureManager;
+
     public int score;
 
     public void AddCapturedCard(Card card)
@@ -56,5 +58,7 @@ public class PlayerController : MonoBehaviour
         tanzaku.Clear();
         tane.Clear();
         hikari.Clear();
+
+        cardCaptureManager.ResetCapturedCardTransder();
     }
 }

@@ -31,5 +31,13 @@ namespace KoiKoiProject
                 default: return plantsRoot;
             }
         }
+
+        public void ResetCapturedCardTransder()
+        {
+            foreach (Transform child in plantsRoot) Destroy(child.gameObject);
+            foreach (Transform child in ribbonsRoot) Destroy(child.gameObject);
+            foreach (Transform child in animalsRoot) Destroy(child.gameObject);
+            foreach (Transform child in brightsRoot) Destroy(child.gameObject);
+        }
     }
 }

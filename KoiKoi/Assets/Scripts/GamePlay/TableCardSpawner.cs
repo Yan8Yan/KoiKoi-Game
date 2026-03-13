@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace KoiKoiProject
@@ -7,7 +8,7 @@ namespace KoiKoiProject
     {
         [Header("Spawn Settings")]
         [SerializeField] private GameObject cardPrefab;       // префаб карты
-        [SerializeField] private List<Transform> tableSlots;  // слоты на столе (первые 4 слота)
+        [SerializeField] private List<Transform> tableSlots; 
 
         [SerializeField] private Vector3 tableCardScale = new Vector3(0.22f, 0.22f, 0.22f); // масштаб карт на столе
 
@@ -51,12 +52,17 @@ namespace KoiKoiProject
         {
             foreach (var slot in tableSlots)
             {
-                foreach (Transform child in slot)
-                    Destroy(child.gameObject);
+                if (slot.childCount > 0) 
+                {
+                    for (int i = slot.childCount - 1; i >= 0; i--)
+                    {
+                        Destroy(slot.GetChild(i).gameObject);
+                    }
+                }
             }
         }
 
 
     }
-}
+    }
 
