@@ -55,5 +55,11 @@ namespace KoiKoiProject
             deck.RemoveAt(0);
             return card;
         }
+
+        public void ResetDeck()
+        {
+            BuildDeck();
+            ShuffleDeck();
+        }
     }
 }

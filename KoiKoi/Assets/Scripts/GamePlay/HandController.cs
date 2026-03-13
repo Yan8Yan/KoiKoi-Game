@@ -86,6 +86,15 @@ public class HandController3D : MonoBehaviour
         UpdateCardVisuals();
     }
 
+    public void ResetHand()
+    {
+        foreach (var card in cardsInHand)
+        {
+            Destroy(card);
+        }
+        cardsInHand.Clear();
+    }
+
     public void RemoveCardFromHand(GameObject card)
     {
         if (cardsInHand.Contains(card))

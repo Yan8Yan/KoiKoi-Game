@@ -16,7 +16,7 @@ namespace KoiKoiProject
             SpawnCardsInSlots();
         }
 
-        private void SpawnCardsInSlots()
+        public void SpawnCardsInSlots()
         {
             if (tableSlots.Count < 8)
             {
@@ -45,7 +45,18 @@ namespace KoiKoiProject
                 var display = cardObj.GetComponent<CardDisplay3D>();
                 display.SetCard(drawnCard);
             }
+
         }
+        public void ResetTable()
+        {
+            foreach (var slot in tableSlots)
+            {
+                foreach (Transform child in slot)
+                    Destroy(child.gameObject);
+            }
+        }
+
+
     }
 }
 

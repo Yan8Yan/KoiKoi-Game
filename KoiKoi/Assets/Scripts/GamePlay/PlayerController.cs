@@ -49,4 +49,12 @@ public class PlayerController : MonoBehaviour
             UIManager.Instance.ShowKoiKoi();
         }
     }
+
+    public void ResetCapturedCards()
+    {
+        kasu.Clear();
+        tanzaku.Clear();
+        tane.Clear();
+        hikari.Clear();
+    }
 }
