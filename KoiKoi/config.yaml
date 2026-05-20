@@ -1,0 +1,9 @@
+behaviors:
+  KoiKoiAI:
+    trainer_type: ppo
+
+    max_steps: 50000
+
+    network_settings:
+      hidden_units: 64
+      num_layers: 2
