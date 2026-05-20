@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         {
             case Card.CardType.kasu:
                 kasu.Add(card);
+
                 break;
 
             case Card.CardType.tanzaku:
