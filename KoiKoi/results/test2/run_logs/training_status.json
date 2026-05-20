@@ -1,0 +1,29 @@
+{
+    "KoiKoiAI": {
+        "checkpoints": [
+            {
+                "steps": 450,
+                "file_path": "results\\test2\\KoiKoiAI\\KoiKoiAI-450.onnx",
+                "reward": -0.7288888888888889,
+                "creation_time": 1779289393.9763315,
+                "auxillary_file_paths": [
+                    "results\\test2\\KoiKoiAI\\KoiKoiAI-450.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 450,
+            "file_path": "results\\test2\\KoiKoiAI.onnx",
+            "reward": -0.7288888888888889,
+            "creation_time": 1779289393.9763315,
+            "auxillary_file_paths": [
+                "results\\test2\\KoiKoiAI\\KoiKoiAI-450.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.2.0.dev0",
+        "torch_version": "2.2.2+cpu"
+    }
+}
