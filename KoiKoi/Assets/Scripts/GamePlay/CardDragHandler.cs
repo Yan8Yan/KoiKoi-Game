@@ -37,6 +37,20 @@ namespace KoiKoiProject
         {
             if (Input.GetMouseButtonDown(0))
             {
+                if (GameManager.Instance == null)
+                {
+                    Debug.LogError("GameManager не найден на сцене");
+                    return;
+                }
+                
+
+                if (!GameManager.Instance.CanPlayerPlayCard())
+                {
+                    Debug.Log("Сейчас нельзя ходить");
+                    return;
+                }
+                
+
                 Ray ray = sceneCamera.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, 100f))
@@ -93,6 +107,7 @@ namespace KoiKoiProject
                 PlaceCardInSlot(draggedCard, slot);
 
                 deckTurnResolver.ResolveDeckDraw(ownerPlayer);
+                GameManager.Instance.NotifyPlayerPlayedCard();
             }
             else
             {
@@ -119,6 +134,7 @@ namespace KoiKoiProject
                 ownerPlayer.CheckForYaku();
 
                 deckTurnResolver.ResolveDeckDraw(ownerPlayer);
+                GameManager.Instance.NotifyPlayerPlayedCard();
             }
 
             draggedCard = null;
