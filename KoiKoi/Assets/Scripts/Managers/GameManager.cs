@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float enemyTurnDelay = 3.5f;
 
-    [SerializeField] private EnemyRandomMover enemyRandomMover;
+    [SerializeField] private EnemyCardAgent enemyCardAgent;
 
     private void Awake()
     {
@@ -44,7 +44,14 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Ход противника");
 
-        MakeEnemyTurn(); 
+        if (enemyCardAgent != null)
+        {
+            enemyCardAgent.BeginEnemyTurn();
+        }
+        else
+        {
+            Debug.LogError("EnemyCardAgent не назначен в GameManager");
+        }
     }
 
     public bool CanPlayerPlayCard()
@@ -64,18 +71,38 @@ public class GameManager : MonoBehaviour
     }
 
     //Заглушка для врага, так как он глюпи не умеет играть
-    private void MakeEnemyTurn()
-    {
-        Debug.Log("Противник пытается сделать рандомный ход");
+    //private void MakeEnemyTurn()
+    //{
+    //    Debug.Log("Противник пытается сделать рандомный ход");
 
-        if (enemyRandomMover != null)
-        {
-            enemyRandomMover.TryMakeRandomMove();
-        }
-        else
-        {
-            Debug.LogError("EnemyRandomMover не назначен в GameManager");
-        }
+    //    if (enemyRandomMover != null)
+    //    {
+    //        enemyRandomMover.TryMakeRandomMove();
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("EnemyRandomMover не назначен в GameManager");
+    //    }
+
+    //    StartPlayerTurn();
+    //}
+
+    public void NotifyEnemyPlayedCard()
+    {
+        if (CurrentTurn != TurnState.EnemyTurn)
+            return;
+
+        Debug.Log("Противник успешно сыграл карту");
+
+        StartPlayerTurn();
+    }
+
+    public void SkipEnemyTurn()
+    {
+        if (CurrentTurn != TurnState.EnemyTurn)
+            return;
+
+        Debug.Log("Противник пропускает ход");
 
         StartPlayerTurn();
     }
