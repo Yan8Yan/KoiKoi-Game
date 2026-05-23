@@ -3939,7 +3939,7 @@ MonoBehaviour:
   - {fileID: 279054906}
   maxAttempts: 200
   enemyPlayer: {fileID: 1515444006}
-  captureManager: {fileID: 704416649}
+  captureManager: {fileID: 1933375949}
 --- !u!1 &1774010566
 GameObject:
   m_ObjectHideFlags: 0
@@ -4626,6 +4626,7 @@ GameObject:
   - component: {fileID: 1933375948}
   - component: {fileID: 1933375947}
   - component: {fileID: 1933375946}
+  - component: {fileID: 1933375949}
   m_Layer: 0
   m_Name: EnemyPlayerPlayedCards
   m_TagString: Untagged
@@ -4730,6 +4731,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933375944}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1933375949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933375944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597b901120da75142816f80b2e28829e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KoiKoiProject.CardCaptureManager
+  plantsRoot: {fileID: 308652714}
+  ribbonsRoot: {fileID: 471878939}
+  animalsRoot: {fileID: 889990536}
+  brightsRoot: {fileID: 1901319187}
 --- !u!1 &1993283139
 GameObject:
   m_ObjectHideFlags: 0
