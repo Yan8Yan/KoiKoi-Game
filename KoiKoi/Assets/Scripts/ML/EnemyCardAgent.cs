@@ -3,6 +3,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using KoiKoiProject;
+using DG.Tweening;
 
 public class EnemyCardAgent : Agent
 {
@@ -140,49 +141,52 @@ public class EnemyCardAgent : Agent
         Transform chosenCard = enemyHand.transform.GetChild(chosenCardIndex);
         Transform chosenSlot = tableSlots[chosenSlotIndex];
 
-        CardDisplay3D enemyDisplay = chosenCard.GetComponent<CardDisplay3D>();
-
-        if (enemyDisplay == null)
+        CardDisplay3D cardDisplay = chosenCard.GetComponent<CardDisplay3D>();
+        if (cardDisplay == null)
         {
-            Debug.LogError("EnemyCardAgent: у карты противника нет CardDisplay3D.");
+            Debug.LogError("EnemyCardAgent: нет CardDisplay3D.");
             return;
         }
 
-        Card enemyCardData = enemyDisplay.CardData();
+        Card enemyCardData = cardDisplay.CardData();
 
-        // Карта кладётся в пустой слот только если у неё нет пары на столе.
+  
         if (chosenSlot.childCount == 0)
         {
-            PlaceCardInSlot(chosenCard, chosenSlot);
+            AnimateMove(chosenCard, chosenSlot, () =>
+            {
+                PlaceCardInSlot(chosenCard, chosenSlot);
 
-            FinishSuccessfulMove(0.3f);
+                FinishSuccessfulMove(0.3f);
+            });
 
-            Debug.Log("ML-противник положил карту в пустой слот: " + enemyCardData.month);
+            Debug.Log("Enemy placed card in empty slot: " + enemyCardData.month);
             return;
         }
-
-        // Если слот занят, action mask уже гарантирует совпадение месяца.
         Transform tableCard = chosenSlot.GetChild(0);
-        CardDisplay3D tableDisplay = tableCard.GetComponent<CardDisplay3D>();
 
+        CardDisplay3D tableDisplay = tableCard.GetComponent<CardDisplay3D>();
         if (tableDisplay == null)
         {
-            Debug.LogError("EnemyCardAgent: у карты на столе нет CardDisplay3D.");
+            Debug.LogError("EnemyCardAgent: нет CardDisplay3D у карты на столе.");
             return;
         }
 
         Card tableCardData = tableDisplay.CardData();
 
-        PlaceCardInSlot(chosenCard, chosenSlot);
+        AnimateMove(chosenCard, chosenSlot, () =>
+        {
+            PlaceCardInSlot(chosenCard, chosenSlot);
 
-        captureManager.CaptureCard(chosenCard, enemyCardData, enemyPlayer);
-        captureManager.CaptureCard(tableCard, tableCardData, enemyPlayer);
+            captureManager.CaptureCard(chosenCard, enemyCardData, enemyPlayer);
+            captureManager.CaptureCard(tableCard, tableCardData, enemyPlayer);
 
-        enemyPlayer.CheckForYaku();
+            enemyPlayer.CheckForYaku();
 
-        FinishSuccessfulMove(1f);
+            FinishSuccessfulMove(1f);
+        });
 
-        Debug.Log("ML-противник захватил пару: " + enemyCardData.month);
+        Debug.Log("Enemy captured pair: " + enemyCardData.month);
     }
 
     private void FailedAttempt(string message)
@@ -341,8 +345,27 @@ public class EnemyCardAgent : Agent
                 int moveIndex = cardIndex * slotCount + slotIndex;
                 bool isLegal = IsLegalMove(cardIndex, slotIndex);
 
+
                 actionMask.SetActionEnabled(0, moveIndex, isLegal);
             }
         }
+    }
+
+    private void AnimateMove(Transform card, Transform slot, System.Action onComplete)
+    {
+        Vector3 targetPos = slot.position + Vector3.up * 0.05f;
+        Quaternion targetRot = Quaternion.Euler(0, 180, 0);
+
+        card
+            .DOMove(targetPos, 0.25f)
+            .SetEase(Ease.OutQuad);
+
+        card
+            .DORotateQuaternion(targetRot, 0.25f)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                onComplete?.Invoke();
+            });
     }
 }
