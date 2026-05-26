@@ -8,6 +8,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private HandController3D enemyHand;
     [SerializeField] private TableCardSpawner tableSpawner;
     [SerializeField] private PlayerController mainPlayer;
+    [SerializeField] private CardCaptureManager enemyCapturedCards;
 
     [ContextMenu("Restart Round")]
     public void RestartRound()
@@ -16,6 +17,7 @@ public class RoundManager : MonoBehaviour
         enemyHand.ResetHand();
 
         mainPlayer.ResetCapturedCards();
+        enemyCapturedCards.ResetCapturedCardTransder();
 
         deckManager.ResetDeck();
         tableSpawner.ResetTable();
