@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MatchManager : MonoBehaviour
@@ -25,21 +26,53 @@ public class MatchManager : MonoBehaviour
 
     private void Start()
     {
-        StartMatch();
-    }
-
-    public void StartMatch()
-    {
-        currentRound = 1;
-
-        roundManager.ResetMatchScores();
-        roundManager.RestartRound();
-
-        Debug.Log("Матч начался");
-        Debug.Log($"Раунд {currentRound}");
+        StartCoroutine(StartMatchRoutine());
     }
 
     public void EndRound()
+    {
+        StartCoroutine(EndRoundRoutine());
+    }
+
+    private void EndMatch()
+    {
+        int playerScore = roundManager.MainPlayer.matchScore;
+        int enemyScore = roundManager.EnemyPlayer.matchScore;
+
+        Debug.Log("Матч завершен");
+        Debug.Log($"Игрок: {playerScore}");
+        Debug.Log($"Противник: {enemyScore}");
+
+        string result;
+
+        if (playerScore > enemyScore)
+        {
+            Debug.Log("Игрок победил матч!");
+            result = "ПОБЕДА ИГРОКА";
+        }
+        else if (enemyScore > playerScore)
+        {
+            Debug.Log("Противник победил матч!");
+            result = "ПОБЕДА ВРАГА";
+        }
+        else
+        {
+            Debug.Log("Ничья!");
+            result = "НИЧЬЯ";
+        }
+
+        GameManager.Instance.SetMatchEnded();
+        StartCoroutine(UIManager.Instance.ShowMatchEnd(result));
+    }
+
+    private IEnumerator ShowRoundStart()
+    {
+        yield return UIManager.Instance.ShowRoundBanner($"РАУНД {currentRound}", 2f);
+
+        Debug.Log("Матч начался");
+    }
+
+    private IEnumerator EndRoundRoutine()
     {
         Debug.Log($"Раунд {currentRound} завершен");
 
@@ -49,50 +82,38 @@ public class MatchManager : MonoBehaviour
         roundManager.MainPlayer.matchScore += playerRoundScore;
         roundManager.EnemyPlayer.matchScore += enemyRoundScore;
 
-        Debug.Log($"Очки игрока за раунд: {playerRoundScore}");
-        Debug.Log($"Очки врага за раунд: {enemyRoundScore}");
+        string roundResult =
+            playerRoundScore > enemyRoundScore ? "Игрок победил раунд"
+            : enemyRoundScore > playerRoundScore ? "Враг победил раунд"
+            : "Ничья";
 
-        Debug.Log($"Всего очков игрока: {roundManager.MainPlayer.matchScore}");
-        Debug.Log($"Всего очков врага: {roundManager.EnemyPlayer.matchScore}");
+        yield return UIManager.Instance.ShowRoundBanner(roundResult, 2f);
 
         if (currentRound >= maxRounds)
         {
             EndMatch();
-            return;
+            yield break;
         }
 
         currentRound++;
 
-        Debug.Log($"Начинается раунд {currentRound}");
+        yield return UIManager.Instance.ShowRoundBanner($"РАУНД {currentRound}", 2f);
 
         roundManager.RestartRound();
-
         GameManager.Instance.StartPlayerTurn();
     }
 
-    private void EndMatch()
+    private IEnumerator StartMatchRoutine()
     {
-        int playerScore = roundManager.MainPlayer.matchScore;
-        int enemyScore = roundManager.EnemyPlayer.matchScore;
+        yield return null;
 
-        Debug.Log("Матч завершен");
+        currentRound = 1;
 
-        Debug.Log($"Игрок: {playerScore}");
-        Debug.Log($"Противник: {enemyScore}");
+        roundManager.ResetMatchScores();
+        roundManager.RestartRound();
 
-        if (playerScore > enemyScore)
-        {
-            Debug.Log("Игрок победил матч!");
-        }
-        else if (enemyScore > playerScore)
-        {
-            Debug.Log("Противник победил матч!");
-        }
-        else
-        {
-            Debug.Log("Ничья!");
-        }
+        yield return UIManager.Instance.ShowRoundBanner($"РАУНД {currentRound}", 2f);
 
-        GameManager.Instance.SetMatchEnded();
+        Debug.Log("Матч начался");
     }
 }
