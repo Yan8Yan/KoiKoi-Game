@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public List<Card> tane = new List<Card>();
     public List<Card> hikari = new List<Card>();
 
+   [SerializeField] private PlayerScoreUI scoreUI;
+
     [SerializeField] CardCaptureManager cardCaptureManager;
 
     public int roundScore;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log($"{gameObject.name} captured {card.cardType}");
+        UpdateScoreUI();
     }
 
     public void CheckForYaku()
@@ -76,6 +79,16 @@ public class PlayerController : MonoBehaviour
     public void ResetMatchScore()
     {
         matchScore = 0;
+    }
+
+    public void UpdateScoreUI()
+    {
+        scoreUI.UpdateUI(
+            hikari.Count,
+            kasu.Count,
+            tane.Count,
+            tanzaku.Count
+        );
     }
 
 }
