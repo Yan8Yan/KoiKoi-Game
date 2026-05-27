@@ -1,4 +1,6 @@
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
 
 namespace KoiKoiProject
 {
@@ -6,7 +8,13 @@ namespace KoiKoiProject
     {
         [SerializeField] private TableSlotManager slotManager;
         [SerializeField] private HandController3D handController;
-        [SerializeField] private CardCaptureManager captureManager;
+        [SerializeField] private Transform deckSpawnPoint;
+
+        [Header("Players")]
+        [SerializeField] private PlayerController mainPlayer;
+
+        [SerializeField] private CardCaptureManager playerCaptureManager;
+        [SerializeField] private CardCaptureManager enemyCaptureManager;
 
         public void ResolveDeckDraw(PlayerController player)
         {
@@ -15,19 +23,44 @@ namespace KoiKoiProject
             if (drawnCard == null)
                 return;
 
-            GameObject cardObj = Instantiate(handController.cardPrefab);
-
-            CardDisplay3D display = cardObj.GetComponent<CardDisplay3D>();
-            display.SetCard(drawnCard);
-
             Transform slot = slotManager.GetEmptySlot();
 
             if (slot == null)
                 return;
 
-            PlaceCard(cardObj.transform, slot);
+            GameObject cardObj = Instantiate(
+                handController.cardPrefab,
+                deckSpawnPoint.position,
+                deckSpawnPoint.rotation
+            );
 
-            CheckDeckMatch(cardObj.transform, drawnCard, player);
+            CardDisplay3D display = cardObj.GetComponent<CardDisplay3D>();
+            display.SetCard(drawnCard);
+
+            AnimateMove(cardObj.transform, slot, () =>
+            {
+                PlaceCard(cardObj.transform, slot);
+
+                CheckDeckMatch(cardObj.transform, drawnCard, player);
+            });
+        }
+
+        private void AnimateMove(Transform card, Transform slot, System.Action onComplete)
+        {
+            Vector3 targetPos = slot.position + Vector3.up * 0.05f;
+            Quaternion targetRot = Quaternion.Euler(0, 180, 0);
+
+            card
+                .DOMove(targetPos, 0.25f)
+                .SetEase(Ease.OutQuad);
+
+            card
+                .DORotateQuaternion(targetRot, 0.25f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                {
+                    onComplete?.Invoke();
+                });
         }
 
         private void PlaceCard(Transform card, Transform slot)
@@ -49,6 +82,9 @@ namespace KoiKoiProject
 
         private void CheckDeckMatch(Transform drawnCardTransform, Card drawnCardData, PlayerController player)
         {
+            CardCaptureManager currentCaptureManager =
+            player == mainPlayer ? playerCaptureManager : enemyCaptureManager;
+
             foreach (Transform slot in slotManager.GetAllSlots())
             {
                 if (slot.childCount == 0)
@@ -64,8 +100,8 @@ namespace KoiKoiProject
 
                 if (tableData.month == drawnCardData.month)
                 {
-                    captureManager.CaptureCard(drawnCardTransform, drawnCardData, player);
-                    captureManager.CaptureCard(tableCard, tableData, player);
+                    currentCaptureManager.CaptureCard(drawnCardTransform, drawnCardData, player);
+                    currentCaptureManager.CaptureCard(tableCard, tableData, player);
 
                     player.CheckForYaku();
                     return;
