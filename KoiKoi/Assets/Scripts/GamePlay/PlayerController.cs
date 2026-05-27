@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] CardCaptureManager cardCaptureManager;
 
-    public int score;
+    public int roundScore;
+    public int matchScore;
 
     public void AddCapturedCard(Card card)
     {
@@ -51,6 +52,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log(gameObject.name + " has Yaku! Points: " + points);
             UIManager.Instance.ShowKoiKoi();
         }
+
+        roundScore += points;
+
+        Debug.Log($"У {gameObject.name} очков в раунде: {roundScore}");
     }
 
     public void ResetCapturedCards()
@@ -62,4 +67,15 @@ public class PlayerController : MonoBehaviour
 
         cardCaptureManager.ResetCapturedCardTransder();
     }
+
+    public void ResetRoundScore()
+    {
+        roundScore = 0;
+    }
+
+    public void ResetMatchScore()
+    {
+        matchScore = 0;
+    }
+
 }

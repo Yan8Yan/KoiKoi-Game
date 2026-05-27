@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     public void OnStopPressed()
     {
         Debug.Log("Player chose STOP");
-        roundManager.RestartRound();
+        roundManager.FinishRound();
         HideKoiKoi();
     }
 }

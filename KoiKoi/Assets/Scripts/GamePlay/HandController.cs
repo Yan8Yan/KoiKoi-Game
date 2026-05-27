@@ -18,13 +18,6 @@ public class HandController3D : MonoBehaviour
     [Header("Hand")]
     public List<GameObject> cardsInHand = new List<GameObject>();
 
-    void Start()
-    {
-        // Для примера добавим 5 карт
-        for (int i = 0; i < 8; i++)
-            AddCard();
-    }
-
     public void AddCard()
     {
         Card drawnCard = DeckManager.Instance.DrawCard();

@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void StartPlayerTurn()
     {
+        CurrentState = GameStates.PlayerTurn;
         CurrentTurn = TurnState.PlayerTurn;
         playerPlayedCardThisTurn = false;
 
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     public void StartEnemyTurn()
     {
+        CurrentState = GameStates.EnemyTurn;
         CurrentTurn = TurnState.EnemyTurn;
 
         Debug.Log("Ход противника");
@@ -106,11 +108,22 @@ public class GameManager : MonoBehaviour
 
         StartPlayerTurn();
     }
+
+    public void SetMatchEnded()
+    {
+        CurrentState = GameStates.MatchEnd;
+
+        Debug.Log("Матч полностью завершен");
+    }
 }
 
 public enum GameStates
 {
-    None,
+    MatchStart,
+    PlayerTurn,
+    EnemyTurn,
+    RoundEnd,
+    MatchEnd
 }
 
 public enum TurnState
