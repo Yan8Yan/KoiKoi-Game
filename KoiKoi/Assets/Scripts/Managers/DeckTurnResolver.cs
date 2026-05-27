@@ -9,6 +9,7 @@ namespace KoiKoiProject
         [SerializeField] private TableSlotManager slotManager;
         [SerializeField] private HandController3D handController;
         [SerializeField] private Transform deckSpawnPoint;
+        [SerializeField] private float deckDrawDelay = 1f;
 
         [Header("Players")]
         [SerializeField] private PlayerController mainPlayer;
@@ -18,15 +19,22 @@ namespace KoiKoiProject
 
         public void ResolveDeckDraw(PlayerController player)
         {
+            StartCoroutine(ResolveDeckDrawWithDelay(player));
+        }
+
+        private IEnumerator ResolveDeckDrawWithDelay(PlayerController player)
+        {
+            yield return new WaitForSeconds(deckDrawDelay);
+
             Card drawnCard = DeckManager.Instance.DrawCard();
 
             if (drawnCard == null)
-                return;
+                yield break;
 
             Transform slot = slotManager.GetEmptySlot();
 
             if (slot == null)
-                return;
+                yield break;
 
             GameObject cardObj = Instantiate(
                 handController.cardPrefab,
