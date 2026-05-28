@@ -23,6 +23,8 @@ namespace KoiKoiProject
 
             BuildDeck();
             ShuffleDeck();
+
+            PrintDeck("AFTER INIT");
         }
 
         void BuildDeck()
@@ -53,6 +55,7 @@ namespace KoiKoiProject
 
             Card card = deck[0];
             deck.RemoveAt(0);
+
             return card;
         }
 
@@ -60,6 +63,16 @@ namespace KoiKoiProject
         {
             BuildDeck();
             ShuffleDeck();
+        }
+
+        void PrintDeck(string tag)
+        {
+            Debug.Log($"===== DECK {tag} =====");
+
+            for (int i = 0; i < deck.Count; i++)
+            {
+                Debug.Log($"{i}: {deck[i].name}");
+            }
         }
     }
 }

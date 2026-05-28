@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         hikari.Clear();
 
         cardCaptureManager.ResetCapturedCardTransder();
+        UpdateScoreUI();
     }
 
     public void ResetRoundScore()

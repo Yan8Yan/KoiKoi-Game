@@ -4194,7 +4194,7 @@ MonoBehaviour:
   tane: []
   hikari: []
   scoreUI: {fileID: 1302086041}
-  cardCaptureManager: {fileID: 704416649}
+  cardCaptureManager: {fileID: 1933375949}
   roundScore: 0
   matchScore: 0
 --- !u!1 &1607860672

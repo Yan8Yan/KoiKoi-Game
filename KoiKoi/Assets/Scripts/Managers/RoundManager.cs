@@ -23,7 +23,7 @@ public class RoundManager : MonoBehaviour
         enemyHand.ResetHand();
 
         mainPlayer.ResetCapturedCards();
-        enemyCapturedCards.ResetCapturedCardTransder();
+        enemyPlayer.ResetCapturedCards();
 
         mainPlayer.ResetRoundScore();
         enemyPlayer.ResetRoundScore();
