@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private bool playerPlayedCardThisTurn;
 
-    [SerializeField] private float enemyTurnDelay = 3.5f;
+    [SerializeField] private float enemyTurnDelay = 2f;
 
     [SerializeField] private EnemyCardAgent enemyCardAgent;
 
@@ -69,25 +70,15 @@ public class GameManager : MonoBehaviour
         playerPlayedCardThisTurn = true;
 
         Debug.Log("Игрок сыграл карту");
-        StartEnemyTurn();
+        StartCoroutine(StartEnemyTurnWithDelay());
     }
 
-    //Заглушка для врага, так как он глюпи не умеет играть
-    //private void MakeEnemyTurn()
-    //{
-    //    Debug.Log("Противник пытается сделать рандомный ход");
+    private IEnumerator StartEnemyTurnWithDelay()
+    {
+        yield return new WaitForSeconds(enemyTurnDelay);
 
-    //    if (enemyRandomMover != null)
-    //    {
-    //        enemyRandomMover.TryMakeRandomMove();
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("EnemyRandomMover не назначен в GameManager");
-    //    }
-
-    //    StartPlayerTurn();
-    //}
+        StartEnemyTurn();
+    }
 
     public void NotifyEnemyPlayedCard()
     {
